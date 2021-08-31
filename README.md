@@ -2,11 +2,15 @@
 
 study about docker for setting up dev environment
 
-## Dockerfile
+## python_env
+
+ubuntu 18.04 이미지를 기반으로 python3 개발 환경을 설치한 이미지를 Dockerfile을 사용하여 빌드
+
+### 1. Dockerfile
 
 새로운 image 생성을 위한 명령어들을 작성해놓은 파일.
 
-### Dockerfile 예시
+#### Dockerfile 예시
 
 ```python
 # FROM: build 하는 image의 기반이 되는 parent image
@@ -28,7 +32,7 @@ COPY test_v01/ .
 RUN pip3 install --no-cache-dir -r requirements.txt
 ```
 
-### Docker build
+### 2. Docker build
 
 Dockerfile을 빌드하여 새로운 docker image를 생성한다.
 
