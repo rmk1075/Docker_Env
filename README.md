@@ -12,7 +12,7 @@ ubuntu 18.04 이미지를 기반으로 python3 개발 환경을 설치한 이미
 
 #### Dockerfile 예시
 
-```python
+```dockerfile
 # FROM: build 하는 image의 기반이 되는 parent image
 FROM ubuntu:18.04
 
@@ -45,3 +45,46 @@ $ docker build -f /path/to/a/Dockerfile .
 # -t option으로 image에 tag를 준다.
 $ docker build -t test/myapp .
 ```
+
+## composetest
+
+docker-compose를 이용하여 dockerfile의 이미지 빌드 및 서비스 설정, 실행
+
+### 1. docker-compose.yml
+
+```yaml
+version: "3.9"
+services:
+  # web과 redis 두가지 service 정의
+  # service - web
+  web:
+    # build from the Dockerfile in current directory
+    build: .
+    # binds the containser and the host machine to the exposed port, 5000
+    ports:
+      - "5000:5000"
+    # mount the project directory (./) on the host to /code inside the container
+    volumes:
+      - .:/code
+    # set the FLASK_ENV environment variable to development
+    environment:
+      FLASK_ENV: development
+  # service - redis 
+  redis:
+    # use a public Redis image pulled from the Docker Hub registry
+    image: "redis:alpine"
+```
+
+### 2. run docker-compose
+
+```sh
+$ docker-compose up
+
+# -d : detach 옵션 사용하여 background 실행
+$ docker-compose up -d
+
+# 현재 실행 중인 프로세스 확인
+$ docker-compose ps
+```
+
+- reference: <https://docs.docker.com/compose/gettingstarted/>
