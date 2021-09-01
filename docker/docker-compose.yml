@@ -2,6 +2,12 @@ version: "3.9"
 services:
   # proj service 정의
   proj:
+    # docker run -i
+    stdin_open: true
+
+    # docker run -t
+    tty: true
+
     # build from the Dockerfile in current directory
     build: .
 
@@ -11,7 +17,7 @@ services:
 
     # mount the project directory (./) on the host to /usr/app inside the container
     volumes:
-      - .:/usr/app
+      - ../repository:/usr/app
 
     # set the FLASK_ENV environment variable to development
     # environment:
