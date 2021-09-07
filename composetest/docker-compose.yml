@@ -4,7 +4,9 @@ services:
   # service - web
   web:
     # build from the Dockerfile in current directory
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     # binds the containser and the host machine to the exposed port, 5000
     ports:
       - "5000:5000"
