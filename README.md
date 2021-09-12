@@ -6,7 +6,7 @@ study about docker for setting up dev environment
 
 ubuntu 18.04 이미지를 기반으로 python3 개발 환경을 설치한 이미지를 Dockerfile을 사용하여 빌드
 
-### 1. Dockerfile
+### 1. python_env/Dockerfile
 
 새로운 image 생성을 위한 명령어들을 작성해놓은 파일.
 
@@ -50,7 +50,7 @@ $ docker build -t test/myapp .
 
 docker-compose를 이용하여 dockerfile의 이미지 빌드 및 서비스 설정, 실행
 
-### 1. docker-compose.yml
+### 1. composetest/docker-compose.yml
 
 ```yaml
 version: "3.9"
@@ -88,3 +88,29 @@ $ docker-compose ps
 ```
 
 - reference: <https://docs.docker.com/compose/gettingstarted/>
+
+## mariadb
+
+docker-compose를 통해 도커 컨테이너에 mariaDB 서버 구축
+
+### 1. mariadb/docker-compose.yml
+
+```yaml
+version: "3.9"
+services:
+  db:
+    # mariadb 이미지 사용
+    image: mariadb
+    # docker container 실행 중 중단 되는 경우에 무조건 restart
+    restart: always
+    ports:
+      - 3306:3306
+    # DB data가 저장되어 있는 /var/lib/mysql를 로컬의 ./db/maria/data volume애 mount하여 container 종료되어도 data가 유지되도록 저장
+    volumes:
+      - ./db/maria/data:/var/lib/mysql
+    # ./db/.env 파일의 environment variables를 사용
+    env_file: ./db/.env
+    # time zone Asia/Seoul
+    environment:
+      TZ: Asia/Seoul
+```
