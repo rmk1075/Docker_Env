@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM --platform=linux/amd64 ubuntu:18.04
 
 LABEL author="jamie <rmk1075@gmail.com>"
 

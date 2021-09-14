@@ -1,5 +1,5 @@
 # Build an Image starting with the Python 3.7 image
-FROM ubuntu:18.04
+FROM --platform=linux/amd64 ubuntu:18.04
 
 # LABEL for author
 LABEL author="jamie"

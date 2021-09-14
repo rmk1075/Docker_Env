@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # Build an Image starting with the Python 3.7 image
-FROM python:3.7-alpine
+FROM --platform=linux/amd64 ubuntu:18.04
 
 # set the working directory to /code
 WORKDIR /code
